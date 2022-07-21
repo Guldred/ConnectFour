@@ -1,11 +1,9 @@
-import classes.Gamefield
+import classes.Game
 
 fun main(args : Array<String>) {
-    println("Hello, world!")
 
-    var field = Gamefield()
-    field.addMark(4, 1)
-    println(field.toString())
+    var game = Game()
+    game.play()
 }
 
 //Kotlin main class
