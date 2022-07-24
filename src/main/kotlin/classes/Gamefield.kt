@@ -55,7 +55,24 @@ class Gamefield {
     }
 
     fun checkWinningCondition(p: Int, x: Int, y: Int): Boolean {
+        //checking X, Y and Crossdirections from current position until field is invalid, 0 or not the same player
+        val sumX = checkNeighbours(p, x, y, 1, 0) + checkNeighbours(p, x, y, -1, 0) - 1 //-1 because starter position is counted twice for pos and neg
+        val sumY = checkNeighbours(p, x, y, 0, 1) + checkNeighbours(p, x, y, 0, -1) - 1
+        val sumXYPos = checkNeighbours(p, x, y, 1, 1) + checkNeighbours(p, x, y, -1, -1) - 1
+        val sumXYNeg = checkNeighbours(p, x, y, 1, -1) + checkNeighbours(p, x, y, -1, 1) - 1
 
-        return false;
+        return (sumX >= 4 || sumY >= 4 || sumXYPos >= 4 || sumXYNeg >= 4)
+    }
+
+    fun checkNeighbours(p: Int, x: Int, y: Int, xDir: Int, yDir: Int): Int {
+        if (field[x][y] == p) {
+            if (x + xDir in field.indices && y + yDir in field[0].indices) {
+                return 1 + checkNeighbours(p, x+xDir, y+yDir, xDir, yDir)
+            } else  {
+                return 1
+            }
+        } else {
+            return 0
+        }
     }
 }

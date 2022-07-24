@@ -23,7 +23,14 @@ class Game {
             //If move is valid, print gamefield and check current move for winning conditions
             if (isValidMove(y)) {
                 println("Player $playersTurn placed a mark in column $input at row $y")
-                if (checkWinningCondition(playersTurn,input-1, y) || checkDraw()) {bRunning = false}
+                if (checkDraw()) {
+                    bRunning = false
+                    println("Game ended in a draw")
+                }
+                if (checkWinningCondition(playersTurn,input-1, y)) {
+                    bRunning = false
+                    println("Player $playersTurn won!")
+                }
                 playersTurn = if (playersTurn==1) 2 else 1
             } else {
                 println("Invalid move. Please try again, player $playersTurn. Valid Inputs arte 1 - 7 excluding full columns")
