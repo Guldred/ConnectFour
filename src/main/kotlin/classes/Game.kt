@@ -11,7 +11,9 @@ class Game {
     fun play() {
         var playersTurn = 1;
         bRunning = true;
-        println("Game started")
+        println("Game started!")
+
+        println(gamefield.toString())
 
         //This is the Game Loop
         while (bRunning) {
@@ -22,7 +24,7 @@ class Game {
 
             //If move is valid, print gamefield and check current move for winning conditions
             if (isValidMove(y)) {
-                println("Player $playersTurn placed a mark in column $input at row $y")
+                println("Player $playersTurn placed a mark in column $input at row ${y+1}")
                 if (checkDraw()) {
                     bRunning = false
                     println("Game ended in a draw")
@@ -41,20 +43,20 @@ class Game {
         }
     }
 
-    fun isValidMove(x: Int): Boolean {
+    private fun isValidMove(x: Int): Boolean {
         return (x!=-1)
     }
 
-    fun getInput(): Int {
-        //get input from console - only allow integers
+    private fun getInput(): Int {
+        //get input from console - only allow integers. If invalid -> return -1 as int
         return (readLine()?:"").toIntOrNull()?:-1
     }
 
-    fun checkWinningCondition(p: Int, x: Int, y: Int): Boolean {
+    private fun checkWinningCondition(p: Int, x: Int, y: Int): Boolean {
         return gamefield.checkWinningCondition(p, x, y)
     }
 
-    fun checkDraw(): Boolean {
+    private fun checkDraw(): Boolean {
         return gamefield.isFull()
     }
 }

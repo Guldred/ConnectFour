@@ -14,7 +14,7 @@ class Gamefield {
 
     @Override
     override fun toString(): String {
-        //inverted print to show field in console correctly
+        //inverted print to show field in console correctly with X on visual X-Axis
         var output = ""
         for (i in field[0].indices) {
             for (j in field.indices) {
@@ -64,15 +64,15 @@ class Gamefield {
         return (sumX >= 4 || sumY >= 4 || sumXYPos >= 4 || sumXYNeg >= 4)
     }
 
-    fun checkNeighbours(p: Int, x: Int, y: Int, xDir: Int, yDir: Int): Int {
-        if (field[x][y] == p) {
+    private fun checkNeighbours(p: Int, x: Int, y: Int, xDir: Int, yDir: Int): Int {
+        return if (field[x][y] == p) {
             if (x + xDir in field.indices && y + yDir in field[0].indices) {
-                return 1 + checkNeighbours(p, x+xDir, y+yDir, xDir, yDir)
-            } else  {
-                return 1
+                1 + checkNeighbours(p, x+xDir, y+yDir, xDir, yDir)
+            } else {
+                1
             }
         } else {
-            return 0
+            0
         }
     }
 }
